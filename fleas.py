@@ -35,8 +35,11 @@ def calc_occupation_densities(initial_state: np.ndarray, transition_matrix: np.n
     return initial_state @ np.linalg.matrix_power(transition_matrix, steps)
 
 
-def calc_unoccupied_squares(densities: np.ndarray) -> float:
-    return 0
+def calc_unoccupied_squares(occupation_densities: np.ndarray) -> float:
+    unoccupied_densities = 1 - occupation_densities
+    unoccupied_density_per_square = np.prod(unoccupied_densities, axis=0)
+    unoccupied_squares = np.sum(unoccupied_density_per_square)
+    return unoccupied_squares
 
 
 if __name__ == '__main__':
