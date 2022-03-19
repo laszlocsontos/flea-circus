@@ -29,6 +29,9 @@ DENSITIES = np.array([
 
 class FleaTests(unittest.TestCase):
 
+    def test_generate_next_states(self):
+        self.assertEqual([3, 7], generate_next_states(6, 3))
+
     def test_generate_transition_matrix(self):
         np.testing.assert_array_almost_equal(generate_transition_matrix(3), TRANSITION_MATRIX)
 
