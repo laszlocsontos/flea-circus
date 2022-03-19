@@ -31,8 +31,8 @@ def generate_transition_matrix(grid_size: int) -> np.ndarray:
     return transition_matrix
 
 
-def calc_occupation_densities(transition_matrix: np.ndarray, steps: int) -> np.ndarray:
-    return np.zeros(transition_matrix.shape)
+def calc_occupation_densities(initial_state: np.ndarray, transition_matrix: np.ndarray, steps: int) -> np.ndarray:
+    return initial_state @ np.linalg.matrix_power(transition_matrix, steps)
 
 
 def calc_unoccupied_squares(densities: np.ndarray) -> float:
