@@ -17,7 +17,7 @@ def generate_next_states(state: int, grid_size: int) -> List[int]:
     if y < grid_size - 1:
         next_states.append((x, y + 1))
     # convert back to state numbers
-    return [(3 * x + y) for x, y in next_states]
+    return [(grid_size * x + y) for x, y in next_states]
 
 
 def generate_transition_matrix(grid_size: int) -> np.ndarray:
@@ -49,9 +49,9 @@ if __name__ == '__main__':
 
     grid_size = int(sys.argv[1])
     transition_matrix = generate_transition_matrix(grid_size)
-
+    initial_state = np.eye(transition_matrix.shape[0])
     steps = int(sys.argv[2])
-    densities = calc_occupation_densities(transition_matrix, steps)
+    densities = calc_occupation_densities(initial_state, transition_matrix, steps)
 
     unoccupied = calc_unoccupied_squares(densities)
     print("{:.6f}".format(unoccupied))
